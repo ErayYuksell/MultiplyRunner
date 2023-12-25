@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GateController : MonoBehaviour
 {
     BoxCollider gateCollider;
+    [SerializeField] int gateValue;
+    [SerializeField] TextMeshProUGUI gateText;
     void Start()
     {
         gateCollider = GetComponent<BoxCollider>();
+        GateStart();
     }
 
 
@@ -20,7 +24,7 @@ public class GateController : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             var playerSpawner = other.GetComponentInParent<PlayerSpawnController>();
-            playerSpawner.PlayerSpawn();
+            playerSpawner.PlayerSpawn(gateValue);
             StartCoroutine(CloseGateCollider());
         }
     }
@@ -29,5 +33,9 @@ public class GateController : MonoBehaviour
         gateCollider.enabled = false;
         yield return new WaitForSeconds(1);
         gateCollider.enabled = true;
+    }
+    void GateStart()
+    {
+        gateText.text = "+" + gateValue.ToString();
     }
 }
