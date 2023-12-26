@@ -41,6 +41,10 @@ public class PlayerSpawnController : MonoBehaviour
             spawnList.Add(obj);
         }
     }
+    public void PlayerDestroy(GameObject player)
+    {
+        spawnList.Remove(player);
+    }
     Vector3 RandomPos()
     {
         Vector3 pos = Random.onUnitSphere * 0.1f;
